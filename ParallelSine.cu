@@ -46,7 +46,7 @@ void sine_serial(float *input, float *output)
 // kernel function (CUDA device)
 // TODO: Implement your graphics kernel here. See assignment instructions for method information
 
-__global__void sine_parallel(float *input, float *output)
+__global__ void sine_parallel(float *input, float *output)
 {
   int i= threadIdx.x;
 
@@ -135,9 +135,40 @@ int main (int argc, char **argv)
   //TODO: Prepare and run your kernel, make sure to copy your results back into h_gpu_result and display your timing results
   float *h_gpu_result = (float*)malloc(N*sizeof(float));
 
-	// syncing and timing stuff. coppy back to cpu
+  // set up memory
+ float * d_input;
+ float * d_output;
 
+ //total time timer
+ long long GPU_start_time = start_timer();
 
+ //set up gpu memory and start timer for transfer time
+ long long GPU_memory_start_timer = start_timer()
+ cudaMalloc((void**) &d_output, N*sizeof(float));
+ cudaMalloc((void**) &d_input, N*sizeof(float));
+ long long GPU_memory_end= stop_timer(GPU_memory_start_timer, "\nGPU memory alocation for GPU ");
+
+ // put the data into gpu memory
+ long long GPU_copytime_start_timer = start_timer();
+ cudaMemcpy(d_input, h_input, N*sizeof(float), cudaMemcpyHostToDevice);
+ long long GPU_copytime_endtimer = stop_timer(GPU_copytimer_start_timer, "\nGpu memory copy time ");
+
+ // run the kernal and time it
+ long long GPU_kerneltime_start_timer = start_timer();
+ sine_parallel<<<1000,1000>>>(d_output, d_input);
+ long long GPU_kerneltime_endtimer = stop_timer(GPU_kerneltimer_start_timer, "\nGpu kernel run time ");
+ 
+ // send back to cpu memory
+ long long GPU_copybacktime_start_timer = start_timer();
+ cudaMemcpy(h_gpu_result, d_output, N*sizeof(float), cudaMemcpyDeviceToHost);
+ long long GPU_copybacktime_endtimer = stop_timer(GPU_copybacktimer_start_timer, "\nGpu copy back to cpu memory time ");
+
+ // stop full process timer
+ long long GPU_starttime_endtimer = stop_timer(GPU_start_time, "\nGPU Total run time ");
+
+ // free the memory
+ cudaFree(d_input);
+ cudaFree(d_output);
 
 
 
