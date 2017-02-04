@@ -2,7 +2,7 @@
 // Assignment 1: ParallelSine
 // CSCI 415: Networking and Parallel Computation
 // Spring 2017
-// Name(s): 
+// Name(s):Brett Knecht, James Corcoran, Brendan Curran, Marshall McKeever 
 //
 // Sine implementation derived from slides here: http://15418.courses.cs.cmu.edu/spring2016/lecture/basicarch
 
