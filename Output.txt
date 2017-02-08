@@ -1,0 +1,27 @@
+bretknec@titan:~/csci415-01-master$ ./parallel
+CPU Run Time: 0.38194 sec
+GPU memory alocation for GPU : 0.12977 sec
+Gpu memory copy time : 0.006859 sec
+Gpu kernel run time : 0.002763 sec
+Gpu copy back to cpu memory time : 0.010196 sec
+GPU Total run time : 0.14971 sec
+Result comparison passed.
+
+bretknec@titan:~/csci415-01-master$ ./parallel
+CPU Run Time: 0.38161 sec
+GPU memory alocation for GPU : 0.11354 sec
+Gpu memory copy time : 0.006996 sec
+Gpu kernel run time : 0.00276 sec
+Gpu copy back to cpu memory time : 0.009968 sec
+GPU Total run time : 0.13338 sec
+Result comparison passed.
+
+bretknec@titan:~/csci415-01-master$ ./parallel
+CPU Run Time: 0.38225 sec
+GPU memory alocation for GPU : 0.093336 sec
+Gpu memory copy time : 0.006912 sec
+Gpu kernel run time : 0.002767 sec
+Gpu copy back to cpu memory time : 0.010478 sec
+GPU Total run time : 0.1136 sec
+Result comparison passed.
+bretknec@titan:~/csci415-01-master$
